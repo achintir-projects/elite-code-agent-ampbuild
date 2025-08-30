@@ -9,18 +9,19 @@ app.use(express.json({ limit: '2mb' }));
 
 const modelRouter = new ModelRouterImpl();
 
-// Register multiple providers if present: OpenAI, Z.ai (if OpenAI-compatible), Ollama (if exposing OpenAI API)
-const providers: Array<{ base?: string; key?: string; model?: string; label: string }> = [
-  { base: process.env.OPENAI_BASE_URL, key: process.env.OPENAI_API_KEY, model: process.env.OPENAI_MODEL, label: 'openai' },
+// Register multiple providers if present: prioritize Z.AI glm-4.5, then OpenAI, DeepSeek, Ollama
+const providers: Array<{ base?: string; key?: string; model?: string; label: 'zai' | 'openai' | 'deepseek' | 'ollama' }> = [
   { base: process.env.ZAI_BASE_URL, key: process.env.ZAI_API_KEY, model: process.env.ZAI_MODEL, label: 'zai' },
+  { base: process.env.OPENAI_BASE_URL, key: process.env.OPENAI_API_KEY, model: process.env.OPENAI_MODEL, label: 'openai' },
   { base: process.env.DEEPSEEK_BASE_URL, key: process.env.DEEPSEEK_API_KEY, model: process.env.DEEPSEEK_MODEL, label: 'deepseek' },
   { base: process.env.OLLAMA_BASE_URL, key: process.env.OLLAMA_API_KEY, model: process.env.OLLAMA_MODEL, label: 'ollama' },
 ];
 
 for (const p of providers) {
   if (p.base) {
-    modelRouter.register(new OpenAICompatProvider({ baseURL: p.base, apiKey: p.key, model: p.model || 'deepseek-coder' }));
-    console.log(`Model provider registered: ${p.label}`, { base: p.base, model: p.model || 'deepseek-coder' });
+    const defaultModel = p.model || (p.label === 'zai' ? 'glm-4.5' : p.label === 'deepseek' ? 'deepseek-chat' : p.label === 'openai' ? 'gpt-4o-mini' : 'deepseek-coder');
+    modelRouter.register(new OpenAICompatProvider({ baseURL: p.base, apiKey: p.key, model: defaultModel }));
+    console.log(`Model provider registered: ${p.label}`, { base: p.base, model: defaultModel });
   }
 }
 if ((providers.filter((p) => !!p.base).length) === 0) {
