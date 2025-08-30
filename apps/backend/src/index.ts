@@ -13,6 +13,7 @@ const modelRouter = new ModelRouterImpl();
 const providers: Array<{ base?: string; key?: string; model?: string; label: string }> = [
   { base: process.env.OPENAI_BASE_URL, key: process.env.OPENAI_API_KEY, model: process.env.OPENAI_MODEL, label: 'openai' },
   { base: process.env.ZAI_BASE_URL, key: process.env.ZAI_API_KEY, model: process.env.ZAI_MODEL, label: 'zai' },
+  { base: process.env.DEEPSEEK_BASE_URL, key: process.env.DEEPSEEK_API_KEY, model: process.env.DEEPSEEK_MODEL, label: 'deepseek' },
   { base: process.env.OLLAMA_BASE_URL, key: process.env.OLLAMA_API_KEY, model: process.env.OLLAMA_MODEL, label: 'ollama' },
 ];
 
