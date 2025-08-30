@@ -13,10 +13,16 @@ export class ModelRouterImpl {
   }
 
   async complete(role: CompletionRole, prompt: string, opts?: { temperature?: number }): Promise<string> {
-    // v1: pick first provider; future: heuristics by role/size/cost
-    const p = this.providers[0];
-    if (!p) throw new Error('No completion providers registered');
-    return p.complete(role, prompt, opts);
+    if (this.providers.length === 0) throw new Error('No completion providers registered');
+    const errors: string[] = [];
+    for (const p of this.providers) {
+      try {
+        return await p.complete(role, prompt, opts);
+      } catch (e: any) {
+        errors.push(`${p.name}: ${e?.message || e}`);
+      }
+    }
+    throw new Error(`All providers failed: ${errors.join(' | ')}`);
   }
 }
 
