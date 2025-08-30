@@ -1,0 +1,21 @@
+{
+  "name": "elite-ai-agent-monorepo",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*",
+    "templates/*/*",
+    "rtl/*"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "npm -ws run build --if-present",
+    "dev": "npm -ws run dev --if-present",
+    "test": "npm -ws run test --if-present",
+    "lint": "npm -ws run lint --if-present",
+    "format": "npm -ws run format --if-present"
+  }
+}

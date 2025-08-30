@@ -1,0 +1,9 @@
+[build]
+  base = "apps/web-ide"
+  publish = "dist"
+  command = "npm install --workspaces=false && npm run build"
+
+[[redirects]]
+  from = "/api/*"
+  to = "http://localhost:8787/:splat"
+  status = 200

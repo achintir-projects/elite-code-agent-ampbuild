@@ -1,0 +1,28 @@
+{
+  "name": "elite-ai-agent",
+  "displayName": "Elite AI Agent",
+  "publisher": "your-publisher",
+  "version": "0.1.0",
+  "engines": { "vscode": ">=1.84.0" },
+  "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      { "command": "elite.plan", "title": "Elite: Plan Task" },
+      { "command": "elite.implement", "title": "Elite: Implement" },
+      { "command": "elite.generateTests", "title": "Elite: Generate Tests" },
+      { "command": "elite.runTests", "title": "Elite: Run Tests" },
+      { "command": "elite.package", "title": "Elite: Package" }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "@types/vscode": "^1.84.0",
+    "@vscode/vsce": "^2.24.0"
+  }
+}

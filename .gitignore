@@ -1,0 +1,22 @@
+# Node
+node_modules/
+dist/
+*.log
+.npmrc
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Rust
+/target
+
+# IDE
+.vscode/
+.DS_Store
+
+# Build artifacts
+coverage/
+artifacts/
+sbom/

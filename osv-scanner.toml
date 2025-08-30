@@ -1,0 +1,3 @@
+[[IgnoredVulns]]
+id = "GHSA-xxxx-xxxx-xxxx"
+reason = "Example ignore; edit as needed"

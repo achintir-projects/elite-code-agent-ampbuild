@@ -1,0 +1,12 @@
+[options]
+mode prove
+
+[engines]
+smtbmc yices
+
+[script]
+read -sv ../src/uart.sv
+prep -top uart
+
+[files]
+../src/uart.sv

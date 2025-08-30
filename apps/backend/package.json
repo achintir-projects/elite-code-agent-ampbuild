@@ -1,0 +1,24 @@
+{
+  "name": "@elite/backend",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "dev": "node --watch dist/index.js",
+    "start": "node dist/index.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.18.0",
+    "dotenv": "^16.4.5",
+    "@elite/core-agent": "0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.4",
+    "@types/node": "^20.14.12",
+    "@types/express": "^4.17.21",
+    "@types/ws": "^8.5.10"
+  }
+}
